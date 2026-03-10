@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>명언 랜덤 생성기</title>
+    <style>
+        /* 
+           [CSS 스타일]
+           웹페이지의 디자인을 담당합니다.
+        */
+        
+        /* 1. 전체 배경 설정: 부드러운 파스텔톤 배경 */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            color: #333;
+        }
+
+        /* 2. 명언 카드 스타일: 흰색 배경, 둥근 모서리, 그림자 */
+        .card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            max-width: 500px;
+            width: 85%;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 3. 명언 텍스트 스타일: 크게 표시 */
+        .quote {
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        /* 4. 작가 이름 스타일: 작게 표시 */
+        .author {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        /* 5. 버튼 스타일: 둥근 버튼, hover 효과 */
+        .btn {
+            background-color: #222;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+        [HTML 구조]
+        화면에 보여질 요소들을 정의합니다.
+    -->
+    <div class="card">
+        <div class="quote" id="quote-text">"삶이 있는 한 희망은 있다."</div>
+        <div class="author" id="author-name">- 키케로</div>
+        <button class="btn" onclick="generateQuote()">새로운 명언 보기</button>
+    </div>
+
+    <script>
+        /* 
+           [JavaScript 로직]
+           버튼을 눌렀을 때 명언을 바꾸는 기능을 담당합니다.
+        */
+
+        // 1. 명언 데이터 리스트
+        const quotes = [
+            { text: "삶이 있는 한 희망은 있다.", author: "키케로" },
+            { text: "산다는 것 그것은 치열한 전투이다.", author: "로망로랑" },
+            { text: "하루에 3시간을 걸으면 7년 후에 지구를 한바퀴 돌 수 있다.", author: "사무엘 존슨" },
+            { text: "언제나 현재에 집중할수 있다면 행복할것이다.", author: "파울로 코엘료" },
+            { text: "진정으로 웃으려면 고통을 참아야하며 , 나아가 고통과 함께 놀 줄 알아야 한다.", author: "찰리 채플린" },
+            { text: "직업에서 행복을 찾아라. 아니면 행복이 무엇인지 절대 모를 것이다.", author: "엘버트 허버드" },
+            { text: "신은 용기있는자를 결코 버리지 않는다.", author: "켄러" },
+            { text: "행복의 문이 하나 닫히면 다른 문이 열린다.", author: "헬렌 켈러" },
+            { text: "피할수 없으면 즐겨라.", author: "로버트 엘리엇" },
+            { text: "먼저 자신을 비웃어라. 다른 사람이 당신을 비웃기 전에.", author: "엘사 맥스웰" }
+        ];
+
+        // 2. 랜덤 명언 생성 함수
+        function generateQuote() {
+            // 리스트에서 무작위로 하나 선택
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const selectedQuote = quotes[randomIndex];
+
+            // 화면의 텍스트를 변경
+            const quoteElement = document.getElementById('quote-text');
+            const authorElement = document.getElementById('author-name');
+
+            // 부드러운 전환 효과를 위해 투명도 조절
+            quoteElement.style.opacity = 0;
+            authorElement.style.opacity = 0;
+
+            setTimeout(() => {
+                quoteElement.innerText = `"${selectedQuote.text}"`;
+                authorElement.innerText = `- ${selectedQuote.author}`;
+                quoteElement.style.opacity = 1;
+                authorElement.style.opacity = 1;
+            }, 200);
+        }
+
+        // 초기 투명도 설정
+        document.getElementById('quote-text').style.transition = "opacity 0.3s";
+        document.getElementById('author-name').style.transition = "opacity 0.3s";
+    </script>
+</body>
+</html>
